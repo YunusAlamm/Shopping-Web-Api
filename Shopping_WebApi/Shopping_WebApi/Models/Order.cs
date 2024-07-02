@@ -1,17 +1,17 @@
 ﻿namespace Shopping_WebApi.Models
 {
-    public class Order
+    public class Order //when completing the purchase of cart, the detail of cart become an order and saves in orderHistory of user.
     {
         public int Id { get; set; }
         public RegularUser Owner { get; set; }
         public DateTime OrderDate { get; set; }
-        public List<Product> Products { get; set; }
+        public Dictionary<Product, int> Products { get; set; }
         public decimal TotalAmount { get; set; }
 
 
         public Order()
         {
-            Products = new List<Product>();
+            Products = new Dictionary<Product, int>();
         }
     }
 }
