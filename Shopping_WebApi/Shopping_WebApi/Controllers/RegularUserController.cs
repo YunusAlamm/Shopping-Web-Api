@@ -25,7 +25,7 @@ namespace Shopping_WebApi.Controllers
             }
             else
             {
-                _storeContext.Add(new RegularUser { Name = username, Password = password, Address = address, PostCode = postcode, PhoneNumber = phonenumber,Email = email });
+                _storeContext.Add(new Costumer { Name = username, Password = password, Address = address, PostCode = postcode, PhoneNumber = phonenumber,Email = email });
                 await _storeContext.SaveChangesAsync();
                 return Ok("user registered!");
             }
