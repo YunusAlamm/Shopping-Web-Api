@@ -12,10 +12,7 @@
         public Cart Cart { get; set; }
         public Dictionary<string,string> Attributes { get; set; }
 
-        public Product()
-        {
-            Attributes = new Dictionary<string, string>(); 
-        }
+        
     }
 
     
