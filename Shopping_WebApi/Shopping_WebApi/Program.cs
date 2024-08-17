@@ -1,23 +1,37 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Shopping_WebApi.Data;
 using Shopping_WebApi.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
+
+var ConectionString = builder.Configuration.GetConnectionString("ShoppingStore");
+builder.Services.AddDbContext<Shopping_StoreContext>(options => options.UseNpgsql(ConectionString));
+
+
+builder.Services.AddIdentityApiEndpoints<User>().
+    AddEntityFrameworkStores<Shopping_StoreContext>();
+
+builder.Services.AddAuthentication(IdentityConstants.BearerScheme);
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.MapIdentityApi<User>();
 
 app.UseHttpsRedirection();
 
