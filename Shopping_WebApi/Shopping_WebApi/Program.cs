@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Shopping_WebApi.Core.Entities;
 using Shopping_WebApi.Infrastructure.Data.DbContext;
 using Shopping_WebApi.Infrastructure.Repositories;
-using Shopping_WebApi.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);

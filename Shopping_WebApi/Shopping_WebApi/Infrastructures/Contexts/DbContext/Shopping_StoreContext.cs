@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Shopping_WebApi.Models;
+using Shopping_WebApi.Core.Entities;
 
 namespace Shopping_WebApi.Infrastructure.Data.DbContext
 {
