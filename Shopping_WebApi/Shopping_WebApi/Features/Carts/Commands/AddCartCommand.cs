@@ -8,8 +8,8 @@ namespace Shopping_WebApi.Features.Carts.Commands
         public string CustomerId { get; set; }
         public Customer Customer { get; set; }
 
-        public ICollection<CartProduct> Products { get; set; }
-        public decimal TotalAmount { get; set; }
+        public ICollection<Cart_Product> Products { get; set; }
+        
 
     }
 }

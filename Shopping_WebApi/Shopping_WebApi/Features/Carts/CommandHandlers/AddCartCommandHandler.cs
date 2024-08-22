@@ -25,8 +25,7 @@ namespace Shopping_WebApi.Features.Carts.CommandHandlers
                 CustomerId = request.CustomerId,
                 Customer = request.Customer,
                 Products = request.Products,
-                TotalAmount = request.TotalAmount,
-            
+               
 
             
             
