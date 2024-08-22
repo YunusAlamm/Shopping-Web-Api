@@ -1,6 +1,6 @@
 ﻿namespace Shopping_WebApi.Core.Entities
 {
-    public class CartProduct
+    public class Cart_Product
     {
         public Guid Id { get; set; }
         public Guid CartId { get; set; }
