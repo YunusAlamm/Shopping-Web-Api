@@ -9,7 +9,14 @@ namespace Shopping_WebApi.Core.Entities
         public string CustomerId { get; set; }
         public Customer Customer { get; set; }
 
-        public ICollection<CartProduct> Products { get; set; }
-        public decimal TotalAmount { get; set; }
+        public ICollection<Cart_Product> Products { get; set; }
+        
+        public decimal TotalAmount
+        {
+            get
+            {
+                return Products?.Sum(cp => cp.Quantity * cp.Product.Price) ?? 0;
+            }
+        }
     }
 }
