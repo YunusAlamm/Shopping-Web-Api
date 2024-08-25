@@ -4,6 +4,7 @@ using MediatR;
 using Shopping_WebApi.Core.Entities;
 using Shopping_WebApi.Features.CartProducts.Dto;
 using Shopping_WebApi.Features.CartProducts.Queries;
+using Shopping_WebApi.Features.Carts.Dtos;
 using Shopping_WebApi.Infrastructure.Repositories;
 
 namespace Shopping_WebApi.Features.CartProducts.QueryHandlers

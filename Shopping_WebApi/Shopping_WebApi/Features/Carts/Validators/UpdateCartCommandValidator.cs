@@ -11,9 +11,6 @@ public class UpdateCartCommandValidator : AbstractValidator<UpdateCartCommand>
             .Must(products => products != null && products.Count > 0)
             .WithMessage("Products collection cannot be empty.");
 
-        RuleFor(x => x.TotalAmount)
-            .GreaterThan(0)
-            .WithMessage("Total amount must be greater than zero.");
     }
 
 }

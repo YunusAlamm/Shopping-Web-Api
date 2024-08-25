@@ -3,8 +3,8 @@ using Shopping_WebApi.Features.CartProducts.Dto;
 
 namespace Shopping_WebApi.Features.CartProducts.Queries
 {
-    public class CartProductQuery : IRequest<CartProductDto>
+    public class CartProductsQuery : IRequest<IEnumerable<CartProductDto>> 
     {
-        public Guid Id { get; set; }
+
     }
 }
