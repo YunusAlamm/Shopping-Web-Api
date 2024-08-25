@@ -38,8 +38,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\CartProducts\QueryHandlers\" />
-  </ItemGroup>
-
 </Project>
