@@ -3,7 +3,6 @@ using FluentValidation;
 using MediatR;
 using Shopping_WebApi.Core.Entities;
 using Shopping_WebApi.Features.Carts.Dtos;
-using Shopping_WebApi.Features.Carts.Validators;
 using Shopping_WebApi.Infrastructure.Repositories;
 
 namespace Shopping_WebApi.Features.Carts.Queries
@@ -11,7 +10,7 @@ namespace Shopping_WebApi.Features.Carts.Queries
     public class CartQueryHandler(
         IGenericRepository<Cart> _genericRepository,
         IMapper _mapper,
-        IValidator<CartQuery> _validator 
+        IValidator<CartQuery> _validator
         )
         : IRequestHandler<CartQuery, CartDto>
     {
@@ -26,7 +25,7 @@ namespace Shopping_WebApi.Features.Carts.Queries
             }
             var cart = await _genericRepository.GetByIdAsync(request.Id);
 
-            return _mapper.Map<CartDto>(request);
+            return _mapper.Map<CartDto>(cart);
         }
     }
 }
