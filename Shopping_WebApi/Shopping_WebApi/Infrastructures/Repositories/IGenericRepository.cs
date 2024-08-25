@@ -7,7 +7,7 @@
         Task InsertAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(Guid id);
-        
+        Task<bool> InsertAsync(string name);
     }
 
 
