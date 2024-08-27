@@ -15,7 +15,7 @@ namespace Shopping_WebApi.Features.Carts.QueryHandlers
     {
         public async Task<IEnumerable<CartDto>> Handle(CartsQuery request, CancellationToken cancellationToken)
         {
-            var carts = _genericRepository.GetAllAsync();
+            var carts = await _genericRepository.GetAllAsync();
 
             return _mapper.Map<IEnumerable<CartDto>>(carts);
 
