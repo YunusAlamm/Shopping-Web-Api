@@ -38,4 +38,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Comments\CommandHandlers\" />
+    <Folder Include="Features\Comments\QueryHandlers\" />
+  </ItemGroup>
+
 </Project>
