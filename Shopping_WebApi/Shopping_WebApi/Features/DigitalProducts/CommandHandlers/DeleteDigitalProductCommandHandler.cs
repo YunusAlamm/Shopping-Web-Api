@@ -10,7 +10,7 @@ namespace Shopping_WebApi.Features.DigitalProducts.CommandHandlers
  
 
     public class DeleteDigitalProductCommandHandler(
-        IGenericRepository<Product> _productRepository,
+        IGenericRepository<DigitalProduct> _productRepository,
         IValidator<DeleteDigitalProductCommand> _validator
         ) : IRequestHandler<DeleteDigitalProductCommand, bool>
     {
