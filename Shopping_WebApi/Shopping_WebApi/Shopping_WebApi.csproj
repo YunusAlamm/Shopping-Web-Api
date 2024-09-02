@@ -40,7 +40,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Comments\CommandHandlers\" />
-    <Folder Include="Features\Comments\QueryHandlers\" />
   </ItemGroup>
 
 </Project>
