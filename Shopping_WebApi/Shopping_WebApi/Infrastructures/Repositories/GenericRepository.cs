@@ -4,7 +4,7 @@ namespace Shopping_WebApi.Infrastructure.Repositories
 {
     public class GenericRepository<T>(DbContext _context) : IGenericRepository<T> where T : class
     {
-        private readonly DbSet<T> _dbSet = _context.Set<T>();
+        protected readonly DbSet<T> _dbSet = _context.Set<T>();
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
