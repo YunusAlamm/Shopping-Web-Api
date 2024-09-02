@@ -24,13 +24,14 @@ namespace Shopping_WebApi.Features.PhysicalProducts.CommandHandlers
             {
                 Name = request.Name,
                 Image = request.Image,
-                Category = request.Category,
+                Categories = request.Categories,
                 Price = request.Price,
                 Description = request.Description,
                 IsSoldOut = request.IsSoldOut ?? false,
                 Attributes = request.Attributes,
                 Weight = request.Weight,
                 Dimensions = request.Dimensions,
+                Quantity = request.Quantity,
                 IsReturnable = request.IsReturnable
             };
             await _genericRepository.InsertAsync(physicalProduct);

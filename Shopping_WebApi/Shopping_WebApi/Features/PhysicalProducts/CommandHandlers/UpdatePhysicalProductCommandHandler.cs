@@ -30,13 +30,14 @@ namespace Shopping_WebApi.Features.PhysicalProducts.CommandHandlers
 
             product.Name = request.Name;
             product.Image = request.Image;
-            product.Category = request.Category;
+            product.Categories = request.Categories;
             product.Price = request.Price;
             product.Description = request.Description;
             product.IsSoldOut = request.IsSoldOut ?? product.IsSoldOut;
             product.Attributes = request.Attributes;
             product.Weight = request.Weight;
             product.Dimensions = request.Dimensions;
+            product.Quantity = request.Quantity;
             product.IsReturnable = request.IsReturnable;
 
 

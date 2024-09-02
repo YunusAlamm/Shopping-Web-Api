@@ -27,7 +27,7 @@ namespace Shopping_WebApi.Features.DigitalProducts.CommandHandlers
             {
                 Name = request.Name,
                 Image = request.Image,
-                Category = request.Category,
+                Categories = request.Categories,
                 Price = request.Price,
                 Description = request.Description,
                 IsSoldOut = request.IsSoldOut ?? false,

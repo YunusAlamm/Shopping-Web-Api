@@ -20,7 +20,7 @@ namespace Shopping_WebApi.Features.DigitalProducts.Validators
                 .NotEmpty()
                 .WithMessage("Image is required.");
 
-            RuleFor(x => x.Category)
+            RuleFor(x => x.Categories)
                 .NotNull()
                 .WithMessage("Category is required.");
 

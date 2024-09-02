@@ -5,5 +5,6 @@
         public double Weight { get; set; }
         public string Dimensions { get; set; }
         public bool IsReturnable { get; set; }
+        public int Quantity { get; set; }
     }
 }
