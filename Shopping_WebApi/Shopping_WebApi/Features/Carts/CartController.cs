@@ -1,43 +1,61 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Shopping_WebApi.Features.Carts.Commands;
+using Shopping_WebApi.Features.Carts.Queries;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Shopping_WebApi.Features.Carts
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CartController : ControllerBase
+    public class CartController(ISender _sender) : ControllerBase
     {
-        // GET: api/<CartController>
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("Carts")]
+        public async Task<IActionResult> Carts()
         {
-            return new string[] { "value1", "value2" };
+            var query = new CartsQuery();
+            var result = await _sender.Send(query);
+            return Ok(result);
         }
 
-        // GET api/<CartController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+
+        [HttpGet]
+        [Route("Cart")]
+        public async Task<IActionResult> Cart(CartQuery query)
         {
-            return "value";
+            var result = await _sender.Send(query);
+            return Ok(result);
         }
 
-        // POST api/<CartController>
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("AddCart")]
+        public async Task<IActionResult> AddCart(AddCartCommand command)
         {
+            var result = _sender.Send(command);
+            return Ok(result);
         }
 
-        // PUT api/<CartController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+
+        [HttpPut]
+        [Route("UpdateCart")]
+
+        public async Task<IActionResult> UpdateCart(UpdateCartCommand command)
         {
+            var result = _sender.Send(command);
+            return Ok(result);
         }
 
-        // DELETE api/<CartController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+
+
+        [HttpDelete]
+        [Route("DeleteCart")]
+        public async Task<IActionResult> DeleteCart(DeleteCartCommand command)
         {
+            var result = _sender.Send(command.Id);
+            return Ok(result);
         }
     }
 }
