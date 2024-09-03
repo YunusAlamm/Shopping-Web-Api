@@ -1,43 +1,55 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Shopping_WebApi.Features.DigitalProducts.Commands;
+using Shopping_WebApi.Features.DigitalProducts.Queries;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Shopping_WebApi.Features.DigitalProducts
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DigitalProductController : ControllerBase
+    public class DigitalProductController(ISender _sender) : ControllerBase
     {
-        // GET: api/<DigitalProductController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("DigitalProducts")]
+        public async Task<IActionResult> DigitalProducts()
         {
-            return new string[] { "value1", "value2" };
+            var query = new DigitalProductsQuery();
+            var result = await _sender.Send(query);
+            return Ok(result);
         }
 
-        // GET api/<DigitalProductController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        [Route("DigitalProduct")]
+        public async Task<IActionResult> DigitalProduct(DigitalProductQuery query)
         {
-            return "value";
+            var result = await _sender.Send(query);
+            return Ok(result);
         }
 
-        // POST api/<DigitalProductController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("AddDigitalProduct")]
+        public async Task<IActionResult> AddDigitalProduct(AddDigitalProductCommand command)
         {
+            var result = await _sender.Send(command);
+            return Ok(result);
         }
 
-        // PUT api/<DigitalProductController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        [Route("UpdateDigitalProduct")]
+        public async Task<IActionResult> UpdateDigitalProduct(UpdateDigitalProductCommand command)
         {
+            var result = await _sender.Send(command);
+            return Ok(result);
         }
 
-        // DELETE api/<DigitalProductController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        [Route("DeleteDigitalProduct")]
+        public async Task<IActionResult> DeleteDigitalProduct(DeleteDigitalProductCommand command)
         {
+            var result = await _sender.Send(command.Id);
+            return Ok(result);
         }
     }
+
 }

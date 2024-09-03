@@ -34,7 +34,7 @@ namespace Shopping_WebApi.Features.Carts
         [Route("AddCart")]
         public async Task<IActionResult> AddCart(AddCartCommand command)
         {
-            var result = _sender.Send(command);
+            var result = await _sender.Send(command);
             return Ok(result);
         }
 
@@ -44,7 +44,7 @@ namespace Shopping_WebApi.Features.Carts
 
         public async Task<IActionResult> UpdateCart(UpdateCartCommand command)
         {
-            var result = _sender.Send(command);
+            var result = await _sender.Send(command);
             return Ok(result);
         }
 
@@ -54,7 +54,7 @@ namespace Shopping_WebApi.Features.Carts
         [Route("DeleteCart")]
         public async Task<IActionResult> DeleteCart(DeleteCartCommand command)
         {
-            var result = _sender.Send(command.Id);
+            var result = await _sender.Send(command.Id);
             return Ok(result);
         }
     }

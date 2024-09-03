@@ -1,43 +1,61 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Shopping_WebApi.Features.CartProduct.Commands;
+using Shopping_WebApi.Features.CartProducts.Queries;
+using Shopping_WebApi.Features.Carts.Commands;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Shopping_WebApi.Features.CartProducts
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CartProductController : ControllerBase
+    public class CartProductController(ISender _sender) : ControllerBase
     {
-        // GET: api/<CartProduct>
+        
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("CartProducts")]
+        public async Task<IActionResult> CartProducts()
         {
-            return new string[] { "value1", "value2" };
+            var query = new CartProductsQuery();
+            var result = await _sender.Send(query);
+            return Ok(result);
+            
         }
 
-        // GET api/<CartProduct>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        
+        [HttpGet]
+        [Route("CartProduct")]
+        public async Task<IActionResult> CartProduct(CartProductQuery query)
         {
-            return "value";
+            var result = await _sender.Send(query);
+            return Ok(result);
         }
 
-        // POST api/<CartProduct>
+        
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("AddCartProduct")]
+        public async Task<IActionResult> AddCartProduct(AddCartProductCommand command)
         {
+            var result = await _sender.Send(command);
+            return Ok(result);
         }
 
-        // PUT api/<CartProduct>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        
+        [HttpPut]
+        [Route("UpdateCartProduct")]
+        public async Task<IActionResult> UpdateCartProduct(UpdateCartProductCommand command)
         {
+            var result = await _sender.Send(command);
+            return Ok(result);
         }
 
-        // DELETE api/<CartProduct>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        
+        [HttpDelete]
+        [Route("DeleteCartProduct")]
+        public async Task<IActionResult> DeleteCartProduct(DeleteCartProductCommand command)
         {
+            var result  = await _sender.Send(command);
+            return Ok(result);
         }
     }
 }

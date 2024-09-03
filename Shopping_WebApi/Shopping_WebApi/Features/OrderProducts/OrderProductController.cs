@@ -1,43 +1,56 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Shopping_WebApi.Features.OrderProducts.Commands;
+using Shopping_WebApi.Features.OrderProducts.Queries;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Shopping_WebApi.Features.OrderProducts
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrderProductController : ControllerBase
+    public class OrderProductController(ISender _sender) : ControllerBase
     {
-        // GET: api/<OrderProductController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("OrderProducts")]
+        public async Task<IActionResult> OrderProducts()
         {
-            return new string[] { "value1", "value2" };
+            var query = new OrderProductsQuery();
+            var result = await _sender.Send(query);
+            return Ok(result);
         }
 
-        // GET api/<OrderProductController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        [Route("OrderProduct")]
+        public async Task<IActionResult> OrderProduct(OrderProductQuery query)
         {
-            return "value";
+            var result = await _sender.Send(query);
+            return Ok(result);
         }
 
-        // POST api/<OrderProductController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("AddOrderProduct")]
+        public async Task<IActionResult> AddOrderProduct(AddOrderProductCommand command)
         {
+            var result = await _sender.Send(command);
+            return Ok(result);
         }
 
-        // PUT api/<OrderProductController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        [Route("UpdateOrderProduct")]
+        public async Task<IActionResult> UpdateOrderProduct(UpdateOrderProductCommand command)
         {
+            var result = await _sender.Send(command);
+            return Ok(result);
         }
 
-        // DELETE api/<OrderProductController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        [Route("DeleteOrderProduct")]
+        public async Task<IActionResult> DeleteOrderProduct(DeleteOrderProductCommand command)
         {
+            var result = await _sender.Send(command.Id);
+            return Ok(result);
         }
     }
+
+
 }

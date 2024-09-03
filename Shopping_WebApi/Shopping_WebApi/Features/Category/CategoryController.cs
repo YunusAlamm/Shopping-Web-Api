@@ -1,43 +1,60 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Shopping_WebApi.Features.Categories.Queries;
+using Shopping_WebApi.Features.Category.Commands;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 
 namespace Shopping_WebApi.Features.Category
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class CategoryController(ISender _sender) : ControllerBase
     {
-        // GET: api/<CategoryController>
+        
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("Categories")]
+        public async Task<IActionResult> Categories()
         {
-            return new string[] { "value1", "value2" };
+            var query = new CategoriesQuery();
+            var result = await _sender.Send(query);
+            return Ok(result);
         }
 
-        // GET api/<CategoryController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        
+        [HttpGet]
+        [Route("Category")]
+        public async Task<IActionResult> Category(CategoryQuery query)
         {
-            return "value";
+            var result = await _sender.Send(query);
+            return Ok(result);
         }
 
-        // POST api/<CategoryController>
+        
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("AddCategory")]
+        public async Task<IActionResult> AddCategory(AddCategoryCommand command)
         {
+            var result = await _sender.Send(command);
+            return Ok(result);
         }
 
-        // PUT api/<CategoryController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        
+        [HttpPut]
+        [Route("UpdateCategory")]
+        public async Task<IActionResult> UpdateCategory(UpdateCategoryCommand command)
         {
+            var result = await _sender.Send(command);
+            return Ok(result);
         }
 
         // DELETE api/<CategoryController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        [Route("DeleteCategory")]
+        public async Task<IActionResult> DeleteCategory(DeleteCategoryCommand command)
         {
+            var result = await _sender.Send(command);
+            return Ok(result);
         }
     }
 }

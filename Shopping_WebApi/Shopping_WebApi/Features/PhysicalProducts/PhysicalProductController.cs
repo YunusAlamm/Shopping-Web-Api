@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Shopping_WebApi.Features.PhysicalProducts.Commands;
+using Shopping_WebApi.Features.PhysicalProducts.Queries;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -6,38 +9,48 @@ namespace Shopping_WebApi.Features.PhysicalProducts
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PhysicalProductController : ControllerBase
+    public class PhysicalProductController(ISender _sender) : ControllerBase
     {
-        // GET: api/<PhysicalProductController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("PhysicalProducts")]
+        public async Task<IActionResult> PhysicalProducts()
         {
-            return new string[] { "value1", "value2" };
+            var query = new PhysicalProductsQuery();
+            var result = await _sender.Send(query);
+            return Ok(result);
         }
 
-        // GET api/<PhysicalProductController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        [Route("PhysicalProduct")]
+        public async Task<IActionResult> PhysicalProduct(PhysicalProductQuery query)
         {
-            return "value";
+            var result = await _sender.Send(query);
+            return Ok(result);
         }
 
-        // POST api/<PhysicalProductController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("AddPhysicalProduct")]
+        public async Task<IActionResult> AddPhysicalProduct(AddPhysicalProductCommand command)
         {
+            var result = await _sender.Send(command);
+            return Ok(result);
         }
 
-        // PUT api/<PhysicalProductController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        [Route("UpdatePhysicalProduct")]
+        public async Task<IActionResult> UpdatePhysicalProduct(UpdatePhysicalProductCommand command)
         {
+            var result = await _sender.Send(command);
+            return Ok(result);
         }
 
-        // DELETE api/<PhysicalProductController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        [Route("DeletePhysicalProduct")]
+        public async Task<IActionResult> DeletePhysicalProduct(DeletePhysicalProductCommand command)
         {
+            var result = await _sender.Send(command.Id);
+            return Ok(result);
         }
     }
+
 }
