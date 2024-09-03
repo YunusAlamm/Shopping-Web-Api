@@ -25,7 +25,7 @@ namespace Shopping_WebApi.Features.CartProducts.CommandHandlers
                 throw new ValidationException(validationResult.Errors);
             }
 
-            _genericRepository.DeleteAsync(request.Id);
+            await _genericRepository.DeleteAsync(request.Id);
             return true;
 
         }

@@ -21,7 +21,7 @@ namespace Shopping_WebApi.Features.OrderProducts.CommandHandlers
 
             orderProduct.QuantityOfProduct = request.QuantityOfProduct;
 
-            _genericRepository.UpdateAsync( orderProduct );
+            await _genericRepository.UpdateAsync( orderProduct );
             return true;
 
 
