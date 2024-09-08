@@ -9,7 +9,7 @@ namespace Shopping_WebApi.Features.PhysicalProducts
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PhysicalProductController(ISender _sender) : ControllerBase
+    public class PhysicalProductManagement(ISender _sender) : ControllerBase
     {
         [HttpGet]
         [Route("PhysicalProducts")]

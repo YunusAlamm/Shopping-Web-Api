@@ -8,7 +8,7 @@ namespace Shopping_WebApi.Features.Orders
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrderController(ISender _sender) : ControllerBase
+    public class OrderManagement(ISender _sender) : ControllerBase
     {
         [HttpGet]
         [Route("Orders")]
