@@ -13,6 +13,9 @@ namespace Shopping_WebApi.Infrastructure.Data.DbContext
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Cart> Carts { get; set; }
+        public DbSet<Cart_Product> CartProducts { get; set; }
+        public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<Comment> comments { get; set; }
 
 
         public DbSet<Category> Categories { get; set; }
