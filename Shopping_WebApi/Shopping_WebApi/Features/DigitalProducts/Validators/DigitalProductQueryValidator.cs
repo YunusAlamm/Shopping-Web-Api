@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
-using Shopping_WebApi.Features.DigitalProducts.Commands;
+using Shopping_WebApi.Features.DigitalProducts.Queries;
 
 namespace Shopping_WebApi.Features.DigitalProducts.Validators
 {
-    public class DigitalProductQueryValidator : AbstractValidator<DeleteDigitalProductCommand>
+    public class DigitalProductQueryValidator : AbstractValidator<DigitalProductQuery>
     {
         public DigitalProductQueryValidator()
         {
