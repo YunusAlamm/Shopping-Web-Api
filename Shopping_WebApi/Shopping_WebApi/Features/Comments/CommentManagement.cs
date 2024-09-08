@@ -10,7 +10,7 @@ namespace Shopping_WebApi.Features.Comments
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CommentController(ISender _sender) : ControllerBase
+    public class CommentManagement(ISender _sender) : ControllerBase
     {
         
         [HttpGet]

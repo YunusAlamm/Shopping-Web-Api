@@ -9,7 +9,7 @@ namespace Shopping_WebApi.Features.CartProducts
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CartProductController(ISender _sender) : ControllerBase
+    public class CartProductManagement(ISender _sender) : ControllerBase
     {
         
         [HttpGet]

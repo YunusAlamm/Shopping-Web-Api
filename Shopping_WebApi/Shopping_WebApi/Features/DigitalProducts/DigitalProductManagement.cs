@@ -8,7 +8,7 @@ namespace Shopping_WebApi.Features.DigitalProducts
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DigitalProductController(ISender _sender) : ControllerBase
+    public class DigitalProductManagement(ISender _sender) : ControllerBase
     {
         [HttpGet]
         [Route("DigitalProducts")]
@@ -45,7 +45,7 @@ namespace Shopping_WebApi.Features.DigitalProducts
 
         [HttpDelete]
         [Route("DeleteDigitalProduct")]
-        public async Task<IActionResult> DeleteDigitalProduct(DeleteDigitalProductCommand command)
+        public async Task<IActionResult> DeleteDigitalProduct(DigitalProductQueryCommand command)
         {
             var result = await _sender.Send(command.Id);
             return Ok(result);
