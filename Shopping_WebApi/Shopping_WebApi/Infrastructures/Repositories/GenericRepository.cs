@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Shopping_WebApi.Infrastructure.Data.DbContext;
 
 namespace Shopping_WebApi.Infrastructure.Repositories
 {
-    public class GenericRepository<T>(DbContext _context) : IGenericRepository<T> where T : class
+    public class GenericRepository<T>(Shopping_StoreContext _context) : IGenericRepository<T> where T : class
     {
         protected readonly DbSet<T> _dbSet = _context.Set<T>();
 
