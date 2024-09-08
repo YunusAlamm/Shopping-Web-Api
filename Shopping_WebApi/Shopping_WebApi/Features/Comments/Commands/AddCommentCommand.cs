@@ -8,7 +8,7 @@ namespace Shopping_WebApi.Features.Comments.Commands
         public Guid ProductId { get; set; }
         public string Content { get; set; }
         public int? Rating { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 
 

@@ -7,7 +7,7 @@ using Shopping_WebApi.Infrastructures.Repositories;
 namespace Shopping_WebApi.Features.Comments.QueryHandlers
 {
     public class GetCommentsByProductIdQueryHandler(
-        CommentRepository _commentRepository,
+        ICommentRepository _commentRepository,
         IMapper _mapper
         ) : IRequestHandler<GetCommentsByProductIdQuery, IEnumerable<CommentDto>>
     {
