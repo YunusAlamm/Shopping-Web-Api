@@ -33,7 +33,8 @@ namespace Shopping_WebApi.Features.DigitalProducts.CommandHandlers
                 IsSoldOut = request.IsSoldOut ?? false,
                 Attributes = request.Attributes,
                 DigitalFormat = request.DigitalFormat,
-                DownloadLink = request.DownloadLink
+                DownloadLink = request.DownloadLink,
+                Genre = request.Genre
             };
 
             await _productRepository.InsertAsync(product);

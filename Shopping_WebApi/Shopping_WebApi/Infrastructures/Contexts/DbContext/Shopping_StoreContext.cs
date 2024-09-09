@@ -6,7 +6,7 @@ namespace Shopping_WebApi.Infrastructure.Data.DbContext
 {
     public class Shopping_StoreContext(DbContextOptions<Shopping_StoreContext> options) : IdentityDbContext<User>(options)
     {
-        public DbSet<User> Users { get; set; }
+        public override DbSet<User> Users { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<StoreManager> StoreManagers { get; set; }
         public DbSet<SystemManager> SystemManagers { get; set; }
@@ -32,7 +32,8 @@ namespace Shopping_WebApi.Infrastructure.Data.DbContext
                 .HasForeignKey<Cart>(c => c.CustomerId);
 
 
-
+            modelBuilder.Entity<Comment>()
+                .HasQueryFilter(c => !c.IsDeleted);
 
 
 

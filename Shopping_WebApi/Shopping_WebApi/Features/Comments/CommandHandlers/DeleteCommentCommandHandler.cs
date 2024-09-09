@@ -18,7 +18,9 @@ namespace Shopping_WebApi.Features.Comments.CommandHandlers
                 throw new ValidationException(validationResult.Errors);
             }
 
-            _commentRepository.DeleteAsync(request.Id); 
+            var comment = await _commentRepository.GetByIdAsync(request.Id);
+            comment.IsDeleted = true;
+            await _commentRepository.UpdateAsync(comment);
             return true;
         }
     }

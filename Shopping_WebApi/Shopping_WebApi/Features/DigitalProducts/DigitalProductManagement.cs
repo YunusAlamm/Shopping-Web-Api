@@ -45,7 +45,7 @@ namespace Shopping_WebApi.Features.DigitalProducts
 
         [HttpDelete]
         [Route("DeleteDigitalProduct")]
-        public async Task<IActionResult> DeleteDigitalProduct(DigitalProductQueryCommand command)
+        public async Task<IActionResult> DeleteDigitalProduct(DeleteDigitalProductCommand command)
         {
             var result = await _sender.Send(command.Id);
             return Ok(result);

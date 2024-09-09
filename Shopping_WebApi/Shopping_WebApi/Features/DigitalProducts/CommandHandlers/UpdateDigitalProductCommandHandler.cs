@@ -37,6 +37,7 @@ namespace Shopping_WebApi.Features.DigitalProducts.CommandHandlers
             product.Attributes = request.Attributes;
             product.DigitalFormat = request.DigitalFormat;
             product.DownloadLink = request.DownloadLink;
+            product.Genre = request.Genre;
 
             await _productRepository.UpdateAsync(product);
             return true;

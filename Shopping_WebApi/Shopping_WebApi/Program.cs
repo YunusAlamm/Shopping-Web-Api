@@ -1,7 +1,6 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Shopping_WebApi.Core.Entities;
 using Shopping_WebApi.Features.Categories.Mapping;
 using Shopping_WebApi.Features.Category.Commands;
@@ -38,8 +37,8 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 builder.Services.AddScoped(typeof(ICommentRepository), typeof(CommentRepository));
 builder.Services.AddAutoMapper(typeof(CategoryMapping));
 builder.Services.AddValidatorsFromAssemblyContaining(typeof(AddCategoryCommandValidator));
-//builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining(typeof(AddCategoryCommandHandler)));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+//builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining(typeof(AddCategoryCommandHandler)));
 
 var app = builder.Build();
 

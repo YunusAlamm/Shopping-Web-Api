@@ -11,10 +11,10 @@ namespace Shopping_WebApi.Features.DigitalProducts.CommandHandlers
 
     public class DeleteDigitalProductCommandHandler(
         IGenericRepository<DigitalProduct> _productRepository,
-        IValidator<DigitalProductQueryCommand> _validator
-        ) : IRequestHandler<DigitalProductQueryCommand, bool>
+        IValidator<DeleteDigitalProductCommand> _validator
+        ) : IRequestHandler<DeleteDigitalProductCommand, bool>
     {
-        public async Task<bool> Handle(DigitalProductQueryCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(DeleteDigitalProductCommand request, CancellationToken cancellationToken)
         {
             var validatioResult = _validator.Validate( request );
             if (!validatioResult.IsValid) 
