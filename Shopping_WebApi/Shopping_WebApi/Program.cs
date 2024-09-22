@@ -8,6 +8,7 @@ using Shopping_WebApi.Features.Category.Validators;
 using Shopping_WebApi.Infrastructure.Data.DbContext;
 using Shopping_WebApi.Infrastructure.Repositories;
 using Shopping_WebApi.Infrastructures.Repositories;
+using Shopping_WebApi.Infrastructures.ZarinPalGateway;
 using System.Reflection;
 
 
@@ -35,6 +36,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped(typeof(ICommentRepository), typeof(CommentRepository));
+builder.Services.AddScoped<ZarinPal.Class.Payment>();
+builder.Services.AddScoped(typeof(IZarinpalService), typeof(ZarinpalService));
 builder.Services.AddAutoMapper(typeof(CategoryMapping));
 builder.Services.AddValidatorsFromAssemblyContaining(typeof(AddCategoryCommandValidator));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
