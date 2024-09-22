@@ -41,8 +41,4 @@
     <PackageReference Include="Zarinpal" Version="3.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\PaymentGateway\" />
-  </ItemGroup>
-
 </Project>
