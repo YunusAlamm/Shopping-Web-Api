@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Shopping_WebApi.Core.Entities;
+using Shopping_WebApi.Core.Models;
 using Shopping_WebApi.Features.PaymentGateway.Commands;
 using Shopping_WebApi.Infrastructures.ZarinPalGateway;
 
@@ -12,7 +12,7 @@ namespace Shopping_WebApi.Features.PaymentGateway.CommandHandlers
         public Task<int> Handle(ValidatePaymentCommand request, CancellationToken cancellationToken)
         {
 
-            var validateRequest = new RequestToValidate
+            var validateRequest = new RequestToValidatePayment
             {
                 Authority = request.Authority,
                 Amount = request.Amount
