@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Shopping_WebApi.Core.Entities;
+using Shopping_WebApi.Core.Models;
 using Shopping_WebApi.Features.PaymentGateway.Commands;
 using Shopping_WebApi.Infrastructures.ZarinPalGateway;
 
