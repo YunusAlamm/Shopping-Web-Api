@@ -1,6 +1,6 @@
 ﻿
 using Dto.Payment;
-using Shopping_WebApi.Core.Entities;
+using Shopping_WebApi.Core.Models;
 using ZarinPal.Class;
 
 
@@ -24,16 +24,16 @@ namespace Shopping_WebApi.Infrastructures.ZarinPalGateway
 
 
             }, Payment.Mode.sandbox);
-
+            
 
             return result.Authority;
         }
 
-        public async Task<int> Validate(RequestToValidate request)
+        public async Task<int> Validate(RequestToValidatePayment request)
         {
             var verificationResult = await _payment.Verification(new DtoVerification()
             {
-                MerchantId = "",
+                MerchantId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 Amount = request.Amount,
                 Authority = request.Authority
             }, Payment.Mode.sandbox);
