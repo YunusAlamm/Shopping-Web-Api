@@ -48,7 +48,7 @@ namespace Shopping_WebApi.Features.Category
             return Ok(result);
         }
 
-        // DELETE api/<CategoryController>/5
+        
         [HttpDelete]
         [Route("DeleteCategory")]
         public async Task<IActionResult> DeleteCategory(DeleteCategoryCommand command)
