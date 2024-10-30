@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shopping_WebApi.Infrastructure.Data.DbContext;
+using System.Linq.Expressions;
 
 namespace Shopping_WebApi.Infrastructure.Repositories
 {
@@ -43,7 +44,10 @@ namespace Shopping_WebApi.Infrastructure.Repositories
            await _context.SaveChangesAsync();
         }
 
-        
+        public async Task<bool> ExistByConditions(Expression<Func<T, bool>> predicate)
+        {
+            return await _dbSet.AnyAsync(predicate);
+        }
     }
 
 
