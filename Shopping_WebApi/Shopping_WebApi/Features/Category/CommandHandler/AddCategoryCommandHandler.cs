@@ -1,9 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
-using Shopping_WebApi.Features.Category.Commands;
 using Shopping_WebApi.Infrastructure.Repositories;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shopping_WebApi.Features.Category.Commands
 {
