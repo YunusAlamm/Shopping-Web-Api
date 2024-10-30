@@ -21,7 +21,7 @@ namespace Shopping_WebApi.Features.Category.Validators
 
         private async Task<bool> BeUniqueName(string name, CancellationToken cancellationToken)
         {
-            return !await _categoryRepository.GetByConditions(c => c.Name == name);
+            return !await _categoryRepository.ExistByConditions(c => c.Name == name);
         }
     }
 }
