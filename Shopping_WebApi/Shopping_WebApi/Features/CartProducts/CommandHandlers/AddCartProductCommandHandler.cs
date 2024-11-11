@@ -8,7 +8,7 @@ using Shopping_WebApi.Infrastructure.Repositories;
 namespace Shopping_WebApi.Features.CartProducts.CommandHandlers
 {
     public class AddCartProductCommandHandler(
-        IGenericRepository<Cart_Product> _genericRepository,
+        IGenericRepository<Core.Entities.CartProduct> _genericRepository,
         IGenericRepository<Cart> _cartRepository,
         IValidator<AddCartProductCommand> _validator,
         IGenericRepository<Product> _productRepository
@@ -30,7 +30,7 @@ namespace Shopping_WebApi.Features.CartProducts.CommandHandlers
                 throw new NotFoundException("Cart or Product not found");
             }
 
-            var cartProduct = new Cart_Product
+            var cartProduct = new Core.Entities.CartProduct
             {
                 
                 CartId = request.CartId,
