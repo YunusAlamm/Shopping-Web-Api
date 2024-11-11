@@ -24,6 +24,21 @@ namespace Shopping_WebApi.Data.Migrations
             NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "hstore");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("CategoryProduct", b =>
+                {
+                    b.Property<Guid>("CategoriesId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ProductsId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("CategoriesId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("CategoryProduct");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -156,7 +171,7 @@ namespace Shopping_WebApi.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.Cart", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.Cart", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -166,9 +181,6 @@ namespace Shopping_WebApi.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("numeric");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId")
@@ -177,7 +189,7 @@ namespace Shopping_WebApi.Data.Migrations
                     b.ToTable("Carts");
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.CartProduct", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.CartProduct", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -198,10 +210,10 @@ namespace Shopping_WebApi.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartProduct");
+                    b.ToTable("CartProducts");
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.Category", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -216,14 +228,49 @@ namespace Shopping_WebApi.Data.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.Order", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.Comment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int?>("Rating")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.Order", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("CustomerId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("IsCompleted")
@@ -242,7 +289,7 @@ namespace Shopping_WebApi.Data.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.OrderProduct", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.OrderProduct", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -254,7 +301,7 @@ namespace Shopping_WebApi.Data.Migrations
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int>("QuantityOfProduct")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -263,27 +310,22 @@ namespace Shopping_WebApi.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderProduct");
+                    b.ToTable("OrderProducts");
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.Product", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<Dictionary<string, string>>("Attributes")
-                        .IsRequired()
                         .HasColumnType("hstore");
-
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("uuid");
 
                     b.Property<string>("CustomerId")
                         .HasColumnType("text");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Discriminator")
@@ -292,22 +334,18 @@ namespace Shopping_WebApi.Data.Migrations
                         .HasColumnType("character varying(21)");
 
                     b.Property<byte[]>("Image")
-                        .IsRequired()
                         .HasColumnType("bytea");
 
                     b.Property<bool?>("IsSoldOut")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.HasIndex("CustomerId");
 
@@ -318,7 +356,7 @@ namespace Shopping_WebApi.Data.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.User", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -403,9 +441,9 @@ namespace Shopping_WebApi.Data.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.DigitalProduct", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.DigitalProduct", b =>
                 {
-                    b.HasBaseType("Shopping_WebApi.Models.Product");
+                    b.HasBaseType("Shopping_WebApi.Core.Entities.Product");
 
                     b.Property<string>("DigitalFormat")
                         .IsRequired()
@@ -415,12 +453,16 @@ namespace Shopping_WebApi.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Genre")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasDiscriminator().HasValue("DigitalProduct");
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.PhysicalProduct", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.PhysicalProduct", b =>
                 {
-                    b.HasBaseType("Shopping_WebApi.Models.Product");
+                    b.HasBaseType("Shopping_WebApi.Core.Entities.Product");
 
                     b.Property<string>("Dimensions")
                         .IsRequired()
@@ -429,22 +471,25 @@ namespace Shopping_WebApi.Data.Migrations
                     b.Property<bool>("IsReturnable")
                         .HasColumnType("boolean");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
                     b.Property<double>("Weight")
                         .HasColumnType("double precision");
 
                     b.HasDiscriminator().HasValue("PhysicalProduct");
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.Customer", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.Customer", b =>
                 {
-                    b.HasBaseType("Shopping_WebApi.Models.User");
+                    b.HasBaseType("Shopping_WebApi.Core.Entities.User");
 
                     b.HasDiscriminator().HasValue("Customer");
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.StoreManager", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.StoreManager", b =>
                 {
-                    b.HasBaseType("Shopping_WebApi.Models.User");
+                    b.HasBaseType("Shopping_WebApi.Core.Entities.User");
 
                     b.Property<string>("SystemManagerId")
                         .HasColumnType("text");
@@ -456,9 +501,24 @@ namespace Shopping_WebApi.Data.Migrations
 
             modelBuilder.Entity("SystemManager", b =>
                 {
-                    b.HasBaseType("Shopping_WebApi.Models.User");
+                    b.HasBaseType("Shopping_WebApi.Core.Entities.User");
 
                     b.HasDiscriminator().HasValue("SystemManager");
+                });
+
+            modelBuilder.Entity("CategoryProduct", b =>
+                {
+                    b.HasOne("Shopping_WebApi.Core.Entities.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Shopping_WebApi.Core.Entities.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -472,7 +532,7 @@ namespace Shopping_WebApi.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Shopping_WebApi.Models.User", null)
+                    b.HasOne("Shopping_WebApi.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -481,7 +541,7 @@ namespace Shopping_WebApi.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Shopping_WebApi.Models.User", null)
+                    b.HasOne("Shopping_WebApi.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -496,7 +556,7 @@ namespace Shopping_WebApi.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Shopping_WebApi.Models.User", null)
+                    b.HasOne("Shopping_WebApi.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -505,33 +565,33 @@ namespace Shopping_WebApi.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Shopping_WebApi.Models.User", null)
+                    b.HasOne("Shopping_WebApi.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.Cart", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.Cart", b =>
                 {
-                    b.HasOne("Shopping_WebApi.Models.Customer", "Customer")
+                    b.HasOne("Shopping_WebApi.Core.Entities.Customer", "Customer")
                         .WithOne("Cart")
-                        .HasForeignKey("Shopping_WebApi.Models.Cart", "CustomerId")
+                        .HasForeignKey("Shopping_WebApi.Core.Entities.Cart", "CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.CartProduct", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.CartProduct", b =>
                 {
-                    b.HasOne("Shopping_WebApi.Models.Cart", "Cart")
+                    b.HasOne("Shopping_WebApi.Core.Entities.Cart", "Cart")
                         .WithMany("Products")
                         .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Shopping_WebApi.Models.Product", "Product")
+                    b.HasOne("Shopping_WebApi.Core.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -542,26 +602,24 @@ namespace Shopping_WebApi.Data.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.Order", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.Order", b =>
                 {
-                    b.HasOne("Shopping_WebApi.Models.Customer", "Customer")
+                    b.HasOne("Shopping_WebApi.Core.Entities.Customer", "Customer")
                         .WithMany("OrderHistory")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.OrderProduct", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.OrderProduct", b =>
                 {
-                    b.HasOne("Shopping_WebApi.Models.Order", "Order")
+                    b.HasOne("Shopping_WebApi.Core.Entities.Order", "Order")
                         .WithMany("Products")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Shopping_WebApi.Models.Product", "Product")
+                    b.HasOne("Shopping_WebApi.Core.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -572,44 +630,31 @@ namespace Shopping_WebApi.Data.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.Product", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.Product", b =>
                 {
-                    b.HasOne("Shopping_WebApi.Models.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Shopping_WebApi.Models.Customer", null)
+                    b.HasOne("Shopping_WebApi.Core.Entities.Customer", null)
                         .WithMany("WishList")
                         .HasForeignKey("CustomerId");
-
-                    b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.StoreManager", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.StoreManager", b =>
                 {
                     b.HasOne("SystemManager", null)
                         .WithMany("StoreManagers")
                         .HasForeignKey("SystemManagerId");
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.Cart", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.Cart", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.Category", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.Order", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("Shopping_WebApi.Models.Order", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Shopping_WebApi.Models.Customer", b =>
+            modelBuilder.Entity("Shopping_WebApi.Core.Entities.Customer", b =>
                 {
                     b.Navigation("Cart");
 
