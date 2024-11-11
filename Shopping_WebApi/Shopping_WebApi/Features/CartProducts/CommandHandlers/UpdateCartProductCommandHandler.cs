@@ -6,7 +6,7 @@ using Shopping_WebApi.Features.CartProduct.Commands;
 using Shopping_WebApi.Infrastructure.Repositories;
 
 public class UpdateCartProductCommandHandler(
-    IGenericRepository<Cart_Product> _cartProductRepository,
+    IGenericRepository<CartProduct> _cartProductRepository,
     IValidator<UpdateCartProductCommand> _validator
     ) : IRequestHandler<UpdateCartProductCommand, bool>
 {

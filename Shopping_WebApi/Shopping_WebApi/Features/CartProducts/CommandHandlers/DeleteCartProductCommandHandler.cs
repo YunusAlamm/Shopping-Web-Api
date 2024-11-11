@@ -9,7 +9,7 @@ namespace Shopping_WebApi.Features.CartProducts.CommandHandlers
 {
     public class DeleteCartProductCommandHandler(
 
-        IGenericRepository<Cart_Product> _genericRepository,
+        IGenericRepository<Core.Entities.CartProduct> _genericRepository,
         IValidator<DeleteCartProductCommand> _validator
         
         ): IRequestHandler<DeleteCartProductCommand,bool>

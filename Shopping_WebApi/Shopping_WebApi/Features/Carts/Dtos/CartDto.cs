@@ -7,7 +7,7 @@ namespace Shopping_WebApi.Features.Carts.Dtos
         public Guid Id { get; set; }
         
 
-        public ICollection<Cart_Product> Products { get; set; }
+        public ICollection<Core.Entities.CartProduct> Products { get; set; }
         public decimal TotalAmount { get; set; }
     }
 }

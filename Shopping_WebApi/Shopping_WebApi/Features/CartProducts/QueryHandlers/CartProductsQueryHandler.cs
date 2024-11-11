@@ -8,7 +8,7 @@ using Shopping_WebApi.Infrastructure.Repositories;
 namespace Shopping_WebApi.Features.CartProducts.QueryHandlers
 {
     public class CartProductsQueryHandler(
-        IGenericRepository<Cart_Product> _genericRepository,
+        IGenericRepository<Core.Entities.CartProduct> _genericRepository,
         IMapper _mapper
         ) : IRequestHandler<CartProductsQuery, IEnumerable<CartProductDto>>
     {

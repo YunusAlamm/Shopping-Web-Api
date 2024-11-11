@@ -8,7 +8,7 @@ namespace Shopping_WebApi.Features.Carts.Commands
         public string CustomerId { get; set; }
         public Customer Customer { get; set; }
 
-        public ICollection<Cart_Product> Products { get; set; }
+        public ICollection<Core.Entities.CartProduct> Products { get; set; }
         
 
     }

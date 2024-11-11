@@ -8,8 +8,8 @@ namespace Shopping_WebApi.Features.CartProducts.Mapping
     {
         public CartProductMapping() 
         {
-            CreateMap<Cart_Product, CartProductDto>();
-            CreateMap<CartProductDto, Cart_Product>();
+            CreateMap<Core.Entities.CartProduct, CartProductDto>();
+            CreateMap<CartProductDto, Core.Entities.CartProduct>();
 
         }
     }
