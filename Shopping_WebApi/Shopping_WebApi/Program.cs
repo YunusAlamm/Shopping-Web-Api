@@ -1,7 +1,6 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Shopping_WebApi.Core.Entities;
@@ -10,15 +9,18 @@ using Shopping_WebApi.Features.Categories.Mapping;
 using Shopping_WebApi.Features.Category.Validators;
 using Shopping_WebApi.Infrastructure.Data.DbContext;
 using Shopping_WebApi.Infrastructure.Repositories;
-using Shopping_WebApi.Infrastructures.EmailServices;
-using Shopping_WebApi.Infrastructures.JwtTokenService;
 using Shopping_WebApi.Infrastructures.Repositories;
-using Shopping_WebApi.Infrastructures.TelegramService;
-using Shopping_WebApi.Infrastructures.ZarinPalGateway;
+using Shopping_WebApi.Infrastructures.Services.EmailServices;
+using Shopping_WebApi.Infrastructures.Services.JwtTokenService;
+using Shopping_WebApi.Infrastructures.Services.TelegramService;
+using Shopping_WebApi.Infrastructures.Services.ZarinPalGateway;
 using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddSingleton<IEmailSender, DummyEmailSender>();
 
 var connectionString = builder.Configuration.GetConnectionString("ShoppingStore");
 builder.Services.AddDbContext<Shopping_StoreContext>(options =>
@@ -27,7 +29,10 @@ builder.Services.AddDbContext<Shopping_StoreContext>(options =>
 
 
 
-builder.Services.AddIdentity<User, IdentityRole>()
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+})
     .AddEntityFrameworkStores<Shopping_StoreContext>()
     .AddDefaultTokenProviders();
 
@@ -72,7 +77,7 @@ builder.Services.AddValidatorsFromAssemblyContaining(typeof(AddCategoryCommandVa
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
 
-builder.Services.AddSingleton<IEmailSender, DummyEmailSender>();
+
 
 
 var telegramConfig = builder.Configuration
@@ -108,6 +113,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-app.MapIdentityApi<User>();
+//
 
 app.Run();
