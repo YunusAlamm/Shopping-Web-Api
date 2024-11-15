@@ -3,12 +3,10 @@ using Shopping_WebApi.Features.RegisterAndLogin.Dto;
 
 namespace Shopping_WebApi.Features.RegisterAndLogin.Commands
 {
-    public class LoginUserCommand : IRequest<string>
+    public class LoginUserCommand(
+        LoginUserDto loginDto
+        ) : IRequest<string>
     {
-        public LoginUserDto LoginDto { get; set; }
-        public LoginUserCommand(LoginUserDto loginDto)
-        {
-            LoginDto = loginDto;
-        }
+        public LoginUserDto LoginDto { get; set; } = loginDto;
     }
 }
