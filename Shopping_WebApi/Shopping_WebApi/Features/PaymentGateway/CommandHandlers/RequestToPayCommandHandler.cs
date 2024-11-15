@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Shopping_WebApi.Core.Models;
 using Shopping_WebApi.Features.PaymentGateway.Commands;
-using Shopping_WebApi.Infrastructures.ZarinPalGateway;
+using Shopping_WebApi.Infrastructures.Services.ZarinPalGateway;
 
 namespace Shopping_WebApi.Features.PaymentGateway.CommandHandlers
 {

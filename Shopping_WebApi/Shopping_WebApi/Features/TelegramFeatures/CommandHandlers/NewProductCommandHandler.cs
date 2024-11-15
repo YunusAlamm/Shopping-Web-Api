@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Shopping_WebApi.Core.Entities;
 using Shopping_WebApi.Features.TelegramFeatures.Commands;
-using Shopping_WebApi.Infrastructures.TelegramService;
+using Shopping_WebApi.Infrastructures.Services.TelegramService;
 
 namespace Shopping_WebApi.Features.TelegramFeatures.CommandHandlers
 {

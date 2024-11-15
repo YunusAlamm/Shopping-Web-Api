@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Shopping_WebApi.Features.TelegramFeatures.Commands;
-using Shopping_WebApi.Infrastructures.TelegramService;
 
 namespace Shopping_WebApi.Features.TelegramFeatures
 {
@@ -18,5 +17,5 @@ namespace Shopping_WebApi.Features.TelegramFeatures
         }
     }
 
-    
+
 }

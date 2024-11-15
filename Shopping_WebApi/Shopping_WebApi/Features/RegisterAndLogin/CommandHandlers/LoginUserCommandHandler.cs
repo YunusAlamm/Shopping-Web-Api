@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Shopping_WebApi.Core.Entities;
 using Shopping_WebApi.Features.RegisterAndLogin.Commands;
-using Shopping_WebApi.Infrastructures.JwtTokenService;
+using Shopping_WebApi.Infrastructures.Services.JwtTokenService;
 
 namespace Shopping_WebApi.Features.RegisterAndLogin.CommandHandlers
 {
