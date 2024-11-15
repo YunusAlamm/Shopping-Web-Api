@@ -1,6 +1,6 @@
 ﻿using Shopping_WebApi.Core.Entities;
 
-namespace Shopping_WebApi.Infrastructures.JwtTokenService
+namespace Shopping_WebApi.Infrastructures.Services.JwtTokenService
 {
     public interface ITokenService
     {

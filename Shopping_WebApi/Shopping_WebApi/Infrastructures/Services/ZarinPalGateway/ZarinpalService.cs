@@ -4,7 +4,7 @@ using Shopping_WebApi.Core.Models;
 using ZarinPal.Class;
 
 
-namespace Shopping_WebApi.Infrastructures.ZarinPalGateway
+namespace Shopping_WebApi.Infrastructures.Services.ZarinPalGateway
 {
     public class ZarinpalService(
         Payment _payment
@@ -24,7 +24,7 @@ namespace Shopping_WebApi.Infrastructures.ZarinPalGateway
 
 
             }, Payment.Mode.sandbox);
-            
+
 
             return result.Authority;
         }

@@ -1,4 +1,4 @@
-﻿namespace Shopping_WebApi.Infrastructures.TelegramService
+﻿namespace Shopping_WebApi.Infrastructures.Services.TelegramService
 {
     public interface ITelegramService
     {

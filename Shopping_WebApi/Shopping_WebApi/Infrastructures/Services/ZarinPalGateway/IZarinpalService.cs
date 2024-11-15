@@ -1,7 +1,7 @@
 ﻿using Shopping_WebApi.Core.Models;
 
 
-namespace Shopping_WebApi.Infrastructures.ZarinPalGateway
+namespace Shopping_WebApi.Infrastructures.Services.ZarinPalGateway
 {
     public interface IZarinpalService
     {

@@ -2,7 +2,7 @@
 using Telegram.Bot.Types;
 using Telegram.Bot;
 
-namespace Shopping_WebApi.Infrastructures.TelegramService
+namespace Shopping_WebApi.Infrastructures.Services.TelegramService
 {
     public class TelegramService(
     TelegramBotConfiguration config
