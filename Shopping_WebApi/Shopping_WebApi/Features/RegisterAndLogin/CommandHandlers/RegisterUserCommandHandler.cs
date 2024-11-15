@@ -5,17 +5,11 @@ using Shopping_WebApi.Features.RegisterAndLogin.Commands;
 
 namespace Shopping_WebApi.Features.RegisterAndLogin.CommandHandlers
 {
-    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, IdentityResult>
+    public class RegisterUserCommandHandler(
+        UserManager<User> _userManager,
+        RoleManager<IdentityRole> _roleManager
+        ) : IRequestHandler<RegisterUserCommand, IdentityResult>
     {
-        private readonly UserManager<User> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-
-        public RegisterUserCommandHandler(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
-        {
-            _userManager = userManager;
-            _roleManager = roleManager;
-        }
-
         public async Task<IdentityResult> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             var user = new User
