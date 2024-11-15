@@ -1,5 +1,7 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Shopping_WebApi.Core.Entities;
@@ -18,15 +20,17 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 var connectionString = builder.Configuration.GetConnectionString("ShoppingStore");
 builder.Services.AddDbContext<Shopping_StoreContext>(options =>
     options.UseNpgsql(connectionString));
 
 
+
+
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<Shopping_StoreContext>()
     .AddDefaultTokenProviders();
+
 
 
 builder.Services.AddAuthentication(options =>
@@ -50,9 +54,13 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+
+
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -63,11 +71,9 @@ builder.Services.AddAutoMapper(typeof(CategoryMapping));
 builder.Services.AddValidatorsFromAssemblyContaining(typeof(AddCategoryCommandValidator));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
-var emailConfig = builder.Configuration
-    .GetSection("EmailConfiguration")
-    .Get<EmailConfiguration>();
-builder.Services.AddSingleton(emailConfig);
-builder.Services.AddScoped<IEmailService, EmailService>();
+
+builder.Services.AddSingleton<IEmailSender, DummyEmailSender>();
+
 
 var telegramConfig = builder.Configuration
     .GetSection("TelegramBotConfiguration")
@@ -75,10 +81,7 @@ var telegramConfig = builder.Configuration
 builder.Services.AddSingleton(telegramConfig);
 builder.Services.AddScoped<ITelegramService, TelegramService>();
 
-
-
 builder.Services.AddScoped<ITokenService, TokenService>();
-
 
 builder.Services.AddCors(options =>
 {
@@ -100,11 +103,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-
 app.UseCors("AllowAll");
-
-app.UseAuthentication();  
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
