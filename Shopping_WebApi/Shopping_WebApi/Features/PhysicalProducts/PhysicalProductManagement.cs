@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shopping_WebApi.Features.PhysicalProducts.Commands;
 using Shopping_WebApi.Features.PhysicalProducts.Queries;
@@ -13,6 +14,7 @@ namespace Shopping_WebApi.Features.PhysicalProducts
     {
         [HttpGet]
         [Route("PhysicalProducts")]
+        [Authorize(Roles = "admin,costumer")]
         public async Task<IActionResult> PhysicalProducts()
         {
             var query = new PhysicalProductsQuery();
@@ -22,6 +24,7 @@ namespace Shopping_WebApi.Features.PhysicalProducts
 
         [HttpGet]
         [Route("PhysicalProduct")]
+        [Authorize(Roles = "admin,costumer")]
         public async Task<IActionResult> PhysicalProduct(PhysicalProductQuery query)
         {
             var result = await _sender.Send(query);
@@ -30,6 +33,7 @@ namespace Shopping_WebApi.Features.PhysicalProducts
 
         [HttpPost]
         [Route("AddPhysicalProduct")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> AddPhysicalProduct(AddPhysicalProductCommand command)
         {
             var result = await _sender.Send(command);
@@ -38,6 +42,7 @@ namespace Shopping_WebApi.Features.PhysicalProducts
 
         [HttpPut]
         [Route("UpdatePhysicalProduct")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> UpdatePhysicalProduct(UpdatePhysicalProductCommand command)
         {
             var result = await _sender.Send(command);
@@ -46,6 +51,7 @@ namespace Shopping_WebApi.Features.PhysicalProducts
 
         [HttpDelete]
         [Route("DeletePhysicalProduct")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeletePhysicalProduct(DeletePhysicalProductCommand command)
         {
             var result = await _sender.Send(command.Id);

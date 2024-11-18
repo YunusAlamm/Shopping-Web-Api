@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shopping_WebApi.Features.Comments.Commands;
 using Shopping_WebApi.Features.Comments.Queries;
@@ -15,6 +16,7 @@ namespace Shopping_WebApi.Features.Comments
         
         [HttpGet]
         [Route("CommentsByProductId")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> CommentsByProductId(GetCommentsByProductIdQuery query)
         {
             var result = await _sender.Send(query);
@@ -24,6 +26,7 @@ namespace Shopping_WebApi.Features.Comments
         
         [HttpGet]
         [Route("CommentsByUserId")]
+        [Authorize(Roles = "admin,costumer")]
         public async Task<IActionResult> CommentsByUserId(GetCommentsByUserIdQuery query)
         {
             var result = await _sender.Send(query);
@@ -32,6 +35,7 @@ namespace Shopping_WebApi.Features.Comments
 
         [HttpGet]
         [Route("Comment")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Comment(GetCommentByIdQuery query)
         {
             var result = await _sender.Send(query);
@@ -41,6 +45,7 @@ namespace Shopping_WebApi.Features.Comments
 
         [HttpPost]
         [Route("AddComment")]
+        [Authorize(Roles = "admin,costumer")]
         public async Task<IActionResult> AddComment(AddCommentCommand command)
         {
             var result = await _sender.Send(command);
@@ -50,6 +55,7 @@ namespace Shopping_WebApi.Features.Comments
         
         [HttpPut]
         [Route("UpdateComment")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> UpdateComment(UpdateCommentCommand command)
         {
             var result = await _sender.Send(command);
@@ -59,6 +65,7 @@ namespace Shopping_WebApi.Features.Comments
         
         [HttpDelete]
         [Route("DeleteComment")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteComment(DeleteCommentCommand command)
         {
             var result = await _sender.Send(command);

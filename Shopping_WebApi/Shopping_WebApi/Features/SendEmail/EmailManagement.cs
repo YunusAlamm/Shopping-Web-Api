@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shopping_WebApi.Features.SendEmail.Commands;
 
@@ -6,6 +7,7 @@ namespace Shopping_WebApi.Features.SendEmail
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "admin")]
     public class EmailManagement(ISender _sender) : ControllerBase
     {
         [HttpPost]

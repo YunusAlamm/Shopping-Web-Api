@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shopping_WebApi.Features.Carts.Commands;
 using Shopping_WebApi.Features.Carts.Queries;
@@ -13,6 +14,7 @@ namespace Shopping_WebApi.Features.Carts
 
         [HttpGet]
         [Route("Carts")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Carts()
         {
             var query = new CartsQuery();
@@ -23,6 +25,7 @@ namespace Shopping_WebApi.Features.Carts
 
         [HttpGet]
         [Route("Cart")]
+        [Authorize(Roles = "costumer")]
         public async Task<IActionResult> Cart(CartQuery query)
         {
             var result = await _sender.Send(query);
@@ -32,6 +35,7 @@ namespace Shopping_WebApi.Features.Carts
 
         [HttpPost]
         [Route("AddCart")]
+        [Authorize(Roles = "costumer")]
         public async Task<IActionResult> AddCart(AddCartCommand command)
         {
             var result = await _sender.Send(command);
@@ -41,6 +45,7 @@ namespace Shopping_WebApi.Features.Carts
 
         [HttpPut]
         [Route("UpdateCart")]
+        [Authorize(Roles = "costumer")]
 
         public async Task<IActionResult> UpdateCart(UpdateCartCommand command)
         {
@@ -52,6 +57,7 @@ namespace Shopping_WebApi.Features.Carts
 
         [HttpDelete]
         [Route("DeleteCart")]
+        [Authorize(Roles = "costumer")]
         public async Task<IActionResult> DeleteCart(DeleteCartCommand command)
         {
             var result = await _sender.Send(command.Id);
