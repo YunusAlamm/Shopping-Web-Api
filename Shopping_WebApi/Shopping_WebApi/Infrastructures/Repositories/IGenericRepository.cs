@@ -10,7 +10,7 @@ namespace Shopping_WebApi.Infrastructure.Repositories
         Task InsertAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(Guid id);
-        
+        Task<IEnumerable<T>> GetAllByConditionsAsync(Expression<Func<T, bool>> predicate);
     }
 
 

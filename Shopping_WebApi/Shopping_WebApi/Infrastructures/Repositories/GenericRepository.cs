@@ -48,6 +48,11 @@ namespace Shopping_WebApi.Infrastructure.Repositories
         {
             return await _dbSet.AnyAsync(predicate);
         }
+
+        public async Task<IEnumerable<T>> GetAllByConditionsAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _dbSet.Where(predicate).ToListAsync();
+        }
     }
 
 
