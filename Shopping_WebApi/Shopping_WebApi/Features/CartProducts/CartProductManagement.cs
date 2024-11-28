@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shopping_WebApi.Features.CartProduct.Commands;
 using Shopping_WebApi.Features.CartProducts.Queries;
@@ -9,6 +10,7 @@ namespace Shopping_WebApi.Features.CartProducts
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "costumer")]
     public class CartProductManagement(ISender _sender) : ControllerBase
     {
         
