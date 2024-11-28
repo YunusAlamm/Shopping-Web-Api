@@ -30,7 +30,7 @@ namespace Shopping_WebApi.Features.PhysicalProducts.CommandHandlers
 
             product.Name = request.Name;
             product.Image = request.Image;
-            product.Categories = request.Categories;
+            product.CategoryIds = request.CategoryIds;
             product.Price = request.Price;
             product.Description = request.Description;
             product.IsSoldOut = request.IsSoldOut ?? product.IsSoldOut;

@@ -27,10 +27,10 @@ namespace Shopping_WebApi.Features.DigitalProducts.CommandHandlers
             {
                 Name = request.Name,
                 Image = request.Image,
-                Categories = request.Categories,
+                CategoryIds = request.CategoryIds,
                 Price = request.Price,
                 Description = request.Description,
-                IsSoldOut = request.IsSoldOut ?? false,
+                
                 Attributes = request.Attributes,
                 DigitalFormat = request.DigitalFormat,
                 DownloadLink = request.DownloadLink,

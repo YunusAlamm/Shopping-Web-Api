@@ -22,9 +22,9 @@ namespace Shopping_WebApi.Features.DigitalProducts.QueryHandlers
 
             digitalProducts = (EnumerableStringSearch<DigitalProduct>)Products
                 .Where(
-                p => p.Categories
+                p => p.CategoryIds
                 .Any(
-                    c => request.Categories
+                    c => request.CategoryIds
                     .Contains(c))
                 );
 

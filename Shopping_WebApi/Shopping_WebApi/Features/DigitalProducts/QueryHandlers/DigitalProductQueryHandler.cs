@@ -25,6 +25,7 @@ public class DigitalProductQueryHandler(
         {
             return null;
         }
+        
 
         return mapper.Map<DigitalProductDto>(product);
     }

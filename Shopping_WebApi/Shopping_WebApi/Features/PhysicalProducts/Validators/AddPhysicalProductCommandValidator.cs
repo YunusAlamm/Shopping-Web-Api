@@ -15,7 +15,7 @@ namespace Shopping_WebApi.Features.PhysicalProducts.Validators
             RuleFor(x => x.Image)
                 .NotEmpty()
                 .WithMessage("Image is required.");
-            RuleFor(x => x.Categories)
+            RuleFor(x => x.CategoryIds)
                 .NotNull()
                 .WithMessage("Category is required.");
             RuleFor(x => x.Price)
