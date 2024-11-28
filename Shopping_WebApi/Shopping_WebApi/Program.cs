@@ -1,13 +1,15 @@
+using System.Reflection;
+using System.Text;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Shopping_WebApi.Core.Entities;
 using Shopping_WebApi.Core.Models;
 using Shopping_WebApi.Features.Categories.Mapping;
 using Shopping_WebApi.Features.Category.Validators;
+using Shopping_WebApi.Features.DigitalProducts.Mapping.Resolvers;
 using Shopping_WebApi.Infrastructure.Data.DbContext;
 using Shopping_WebApi.Infrastructure.Repositories;
 using Shopping_WebApi.Infrastructures.Repositories;
@@ -15,8 +17,6 @@ using Shopping_WebApi.Infrastructures.Services.EmailServices;
 using Shopping_WebApi.Infrastructures.Services.JwtTokenService;
 using Shopping_WebApi.Infrastructures.Services.TelegramService;
 using Shopping_WebApi.Infrastructures.Services.ZarinPalGateway;
-using System.Reflection;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,7 +47,7 @@ builder.Services.AddAuthentication(options =>
     options.DefaultAuthenticateScheme = "Bearer";
     options.DefaultChallengeScheme = "Bearer";
 })
-.AddJwtBearer("Bearer",options =>
+.AddJwtBearer("Bearer", options =>
 {
     options.RequireHttpsMetadata = false;
     options.SaveToken = true;
@@ -100,6 +100,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped(typeof(ICommentRepository), typeof(CommentRepository));
+builder.Services.AddTransient<CategoryNamesResolver>();
 builder.Services.AddScoped<ZarinPal.Class.Payment>();
 builder.Services.AddScoped(typeof(IZarinpalService), typeof(ZarinpalService));
 builder.Services.AddAutoMapper(typeof(CategoryMapping));
