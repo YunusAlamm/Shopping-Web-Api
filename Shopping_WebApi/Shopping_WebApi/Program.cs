@@ -2,6 +2,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Shopping_WebApi.Core.Entities;
 using Shopping_WebApi.Core.Models;
@@ -20,7 +21,10 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddSingleton<IEmailSender, DummyEmailSender>();
+var emailConfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
+builder.Services.AddSingleton(emailConfig);
+builder.Services.AddScoped<IEmailSender, EmailSender>();
+
 
 var connectionString = builder.Configuration.GetConnectionString("ShoppingStore");
 builder.Services.AddDbContext<Shopping_StoreContext>(options =>
