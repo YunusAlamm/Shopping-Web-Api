@@ -23,7 +23,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 var emailConfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
 builder.Services.AddSingleton(emailConfig);
-builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddTransient<IEmailSender<User>, EmailSenderAdapter>();
 
 
 var connectionString = builder.Configuration.GetConnectionString("ShoppingStore");
@@ -33,12 +34,9 @@ builder.Services.AddDbContext<Shopping_StoreContext>(options =>
 
 
 
-builder.Services.AddIdentity<User, IdentityRole>(options =>
-{
-    options.SignIn.RequireConfirmedAccount = false;
-})
-    .AddEntityFrameworkStores<Shopping_StoreContext>()
-    .AddDefaultTokenProviders();
+builder.Services.AddIdentity<User, IdentityRole>()
+.AddEntityFrameworkStores<Shopping_StoreContext>()
+.AddDefaultTokenProviders();
 
 
 
@@ -140,10 +138,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
+
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.MapIdentityApi<User>();
 app.MapControllers();
-// app.MapIdentityApi<User>();
+
 
 app.Run();

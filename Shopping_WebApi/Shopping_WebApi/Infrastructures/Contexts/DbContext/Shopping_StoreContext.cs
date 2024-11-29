@@ -26,6 +26,7 @@ namespace Shopping_WebApi.Infrastructure.Data.DbContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             base.OnModelCreating(modelBuilder);
 
             
@@ -41,9 +42,17 @@ namespace Shopping_WebApi.Infrastructure.Data.DbContext
             
             modelBuilder.Entity<User>()
                 .Property(u => u.FirstName)
-                .IsRequired(); 
+                .IsRequired()
+                .HasMaxLength(50); 
 
-          
+            modelBuilder.Entity<User>()
+                .Property(u => u.LastName)
+                .IsRequired()
+                .HasMaxLength(50); 
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.Address)
+                .HasMaxLength(250); 
         }
     }
 }
