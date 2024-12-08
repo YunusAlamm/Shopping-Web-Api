@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Shopping_WebApi.Core.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Shopping_WebApi.Infrastructure.Data.DbContext
 {
@@ -52,7 +53,28 @@ namespace Shopping_WebApi.Infrastructure.Data.DbContext
 
             modelBuilder.Entity<User>()
                 .Property(u => u.Address)
-                .HasMaxLength(250); 
+                .HasMaxLength(250);
+
+            modelBuilder.Entity<SystemManager>()
+                .HasIndex(sm => sm.UserName)
+                .IsUnique()
+                .HasDatabaseName("Unique_SystemManager_UserName");
+
+            var systemManager = new SystemManager
+            {
+                Id = "1",
+                UserName = "admin",
+                NormalizedUserName = "ADMIN",
+                Email = "test@gmail.com",
+                NormalizedEmail = "TEST@GMAIL.COM",
+                FirstName = "Yunus",
+                LastName = "Alamdari",
+                Address = "iran, tehran",
+                EmailConfirmed = true,
+                PasswordHash = new PasswordHasher<User>().HashPassword(null, "SomeStrongPassword123@$" )
+            };
+
+            modelBuilder.Entity<SystemManager>().HasData(systemManager);
         }
     }
 }
