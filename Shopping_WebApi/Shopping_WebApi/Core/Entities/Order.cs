@@ -7,7 +7,7 @@
         public decimal TotalAmount { get; set; }
 
         public bool IsCompleted { get; set; }
-        public DateTime PurchaseTime { get; set; }
+        public DateTime PurchaseTime { get; set; }= DateTime.Now;
 
         public ICollection<OrderProduct>? Products { get; set; }
 

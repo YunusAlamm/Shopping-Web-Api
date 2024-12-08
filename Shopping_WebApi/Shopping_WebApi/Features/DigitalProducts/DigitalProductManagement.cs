@@ -7,6 +7,7 @@ using Shopping_WebApi.Features.DigitalProducts.Queries;
 
 namespace Shopping_WebApi.Features.DigitalProducts
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class DigitalProductManagement(ISender _sender) : ControllerBase

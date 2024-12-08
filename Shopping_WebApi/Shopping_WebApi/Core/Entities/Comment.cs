@@ -8,7 +8,7 @@
             public Guid ProductId { get; set; }
             public string Content { get; set; }
             public int? Rating { get; set; }
-            public DateTime CreatedAt { get; set; }
+            public DateTime CreatedAt { get; set; }= DateTime.Now;
             public DateTime? UpdatedAt { get; set; }
             public bool IsApproved { get; set; }
             public bool IsDeleted {  get; set; }
