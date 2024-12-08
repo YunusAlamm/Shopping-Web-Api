@@ -1,7 +1,4 @@
-﻿using MediatR;
-using Shopping_WebApi.Features.Carts.Dtos;
-
-namespace Shopping_WebApi.Core.Entities
+﻿namespace Shopping_WebApi.Core.Entities
 {
     public class Cart
     {
